@@ -1,0 +1,40 @@
+export const HUBSPOT_OBJECT_TYPE_IDS = [
+  "0-1", // contact
+  "0-3", // deal
+] as const;
+
+export const HUBSPOT_DEFAULT_SETTINGS = {
+  leadTriggerEvent: "dealCreated",
+  closedWonDealStageId: "closedwon",
+};
+
+export const LEAD_TRIGGER_EVENT_OPTIONS = [
+  "lifecycleStageReached", // contact's lifecyclestage reaches leadLifecycleStageId
+  "dealCreated", // a deal is created for the contact
+  "dealStageReached", // a deal's dealstage reaches leadDealStageId
+] as const;
+
+export const HUBSPOT_DUB_CONTACT_PROPERTIES = [
+  {
+    label: "Veltrio Click ID",
+    name: "dub_id",
+    type: "string",
+    fieldType: "text",
+    groupName: "contactinformation",
+    formField: true, // Allow the property to be used in a HubSpot form.
+  },
+  {
+    label: "Veltrio Link",
+    name: "dub_link",
+    type: "string",
+    fieldType: "text",
+    groupName: "contactinformation",
+  },
+  {
+    label: "Veltrio Partner Email",
+    name: "dub_partner_email",
+    type: "string",
+    fieldType: "text",
+    groupName: "contactinformation",
+  },
+];
