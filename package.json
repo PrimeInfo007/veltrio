@@ -3,7 +3,7 @@
   "private": true,
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "build": "turbo build --filter=web...",
+    "build": "node scripts/build-web.mjs",
     "build:packages": "pnpm -r --filter \"./packages/**\" build",
     "dev": "turbo dev",
     "lint": "turbo lint",
@@ -19,7 +19,8 @@
     "script": "echo 'Run this script in apps/web'",
     "test": "turbo run test",
     "build:all": "turbo build",
-    "start": "pnpm --filter web start"
+    "start": "cd apps/web && node node_modules/next/dist/bin/next start",
+    "build:turbo": "turbo build --filter=web..."
   },
   "devDependencies": {
     "@dub/tailwind-config": "workspace:*",

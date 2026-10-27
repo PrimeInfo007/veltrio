@@ -4,7 +4,7 @@
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "dev": "pnpm prisma:generate && concurrently --kill-others \"next dev --turbopack --port 8888\"",
-    "build": "pnpm prisma:generate && pnpm prisma:push --skip-generate && next build",
+    "build": "pnpm prisma:generate && next build",
     "lint": "next lint",
     "start": "next start",
     "script": "tsx ./scripts/run.ts",
