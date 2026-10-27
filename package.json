@@ -3,7 +3,7 @@
   "private": true,
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "build": "turbo build",
+    "build": "turbo build --filter=web...",
     "build:packages": "pnpm -r --filter \"./packages/**\" build",
     "dev": "turbo dev",
     "lint": "turbo lint",
@@ -17,7 +17,9 @@
     "publish-ui": "turbo build --filter='@dub/ui' && cd packages/ui && npm publish && cd ../../",
     "publish-utils": "turbo build --filter='@dub/utils' && cd packages/utils && npm publish && cd ../../",
     "script": "echo 'Run this script in apps/web'",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "build:all": "turbo build",
+    "start": "pnpm --filter web start"
   },
   "devDependencies": {
     "@dub/tailwind-config": "workspace:*",

@@ -129,5 +129,6 @@
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "packageManager": "pnpm@9.15.9"
 }
