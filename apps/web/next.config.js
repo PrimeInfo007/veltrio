@@ -30,10 +30,17 @@ module.exports = withPlausibleProxy({
     "@dub/email",
     "@boxyhq/saml-jackson",
   ],
+  // Low-memory (Hostinger) builds ship a self-contained server with only the
+  // files it needs, instead of the whole node_modules (the plan caps file count)
+  ...(process.env.LOW_MEMORY_BUILD === "1" && { output: "standalone" }),
   outputFileTracingIncludes: {
     "/api/auth/saml/token": [
       "./node_modules/jose/**/*",
       "./node_modules/openid-client/**/*",
+    ],
+    // Prisma's query engine lives inside pnpm's store; make sure it ships
+    "/**/*": [
+      "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/**/*",
     ],
   },
   experimental: {
