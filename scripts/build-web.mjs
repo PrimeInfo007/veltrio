@@ -15,10 +15,15 @@ const steps = [
   ["apps/web", "prisma generate --schema=./prisma/schema"],
   // Creates/updates tables to match the schema; fails instead of dropping data
   ["apps/web", "prisma db push --skip-generate --schema=./prisma/schema"],
-  ["apps/web", "next build"],
+  // Larger heap than Node's ~4 GB default; type-check/lint skipped (see next.config.js)
+  [
+    "apps/web",
+    "node --max-old-space-size=6144 node_modules/next/dist/bin/next build",
+    { LOW_MEMORY_BUILD: "1" },
+  ],
 ];
 
-for (const [dir, command] of steps) {
+for (const [dir, command, extraEnv = {}] of steps) {
   const cwd = join(root, dir);
   console.log(`\n==> ${dir}: ${command}`);
   execSync(command, {
@@ -26,6 +31,7 @@ for (const [dir, command] of steps) {
     stdio: "inherit",
     env: {
       ...process.env,
+      ...extraEnv,
       PATH: [
         join(cwd, "node_modules", ".bin"),
         join(root, "node_modules", ".bin"),

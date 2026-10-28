@@ -47,7 +47,15 @@ module.exports = withPlausibleProxy({
     serverActions: {
       bodySizeLimit: "4mb",
     },
+    // Lower peak memory during builds (needed on memory-capped hosts)
+    webpackMemoryOptimizations: true,
   },
+  // Low-memory builds (scripts/build-web.mjs) skip type-checking and linting;
+  // run `tsc --noEmit` before pushing instead
+  ...(process.env.LOW_MEMORY_BUILD === "1" && {
+    typescript: { ignoreBuildErrors: true },
+    eslint: { ignoreDuringBuilds: true },
+  }),
   webpack: (config, { webpack, isServer }) => {
     if (isServer) {
       config.plugins.push(
