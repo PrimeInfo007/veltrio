@@ -19,7 +19,7 @@
     "script": "echo 'Run this script in apps/web'",
     "test": "turbo run test",
     "build:all": "turbo build",
-    "start": "cd apps/web && node node_modules/next/dist/bin/next start",
+    "start": "node server.js",
     "build:turbo": "turbo build --filter=web..."
   },
   "devDependencies": {
@@ -36,5 +36,6 @@
     "@types/react-dom": "19.1.9",
     "chrono-node": "2.7.5"
   },
-  "packageManager": "pnpm@9.15.9"
+  "packageManager": "pnpm@9.15.9",
+  "main": "server.js"
 }
