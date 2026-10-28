@@ -49,6 +49,12 @@ module.exports = withPlausibleProxy({
     },
     // Lower peak memory during builds (needed on memory-capped hosts)
     webpackMemoryOptimizations: true,
+    // One page-data/static-generation worker instead of one per CPU core,
+    // so the low-memory build stays under the host's memory cap
+    ...(process.env.LOW_MEMORY_BUILD === "1" && {
+      cpus: 1,
+      workerThreads: false,
+    }),
   },
   // Low-memory builds (scripts/build-web.mjs) skip type-checking and linting;
   // run `tsc --noEmit` before pushing instead
